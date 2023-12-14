@@ -24,16 +24,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -60,8 +73,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-//                SurfaceTest()
-                SurfaceTest2()
+                ScaffoldTest()
             }
         }
     }
@@ -71,8 +83,77 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-//        SurfaceTest()
-        SurfaceTest2()
+        ScaffoldTest()
+    }
+}
+
+@Composable
+fun ScaffoldTest() {
+    Scaffold(
+        topBar = { ScaffoldTestTopBar() },
+        floatingActionButton = {
+            ScaffoldTestFloatingActionButton()
+        },
+        bottomBar = {
+            ScaffoldTestBottomBar()
+        }
+    ) { paddingValues ->
+        // paddingValues = Topbar부분에 가려지는걸 방지하기 위해서 content부분을 padding으로 밀어줌
+        // paddingValues가 없으면 TopBar에 가려서 글자가 보이지 않음
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            Text(text = "This is Content")
+        }
+    }
+}
+
+@Composable
+fun ScaffoldTestTopBar() {
+    TopAppBar(
+        title = { Text(text = "MainTopBar") },
+        navigationIcon = {
+            IconButton(onClick = {}) {
+                Icon(Icons.Default.Add, contentDescription = "add")
+            }
+        },
+        actions = {
+            Button(onClick = {}) {
+                Text(text = "Btn")
+            }
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors(Color.Red)
+    )
+}
+
+@Composable
+fun ScaffoldTestFloatingActionButton() {
+    FloatingActionButton(onClick = { /*TODO*/ }) {
+        Icon(Icons.Default.Menu, contentDescription = "Menu")
+    }
+}
+
+@Composable
+fun ScaffoldTestBottomBar() {
+    BottomAppBar(
+        containerColor = Color.Red
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Default.Home, contentDescription = "Home")
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Default.Favorite, contentDescription = "Favorite")
+            }
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(Icons.Default.Settings, contentDescription = "Settings")
+            }
+        }
     }
 }
 
