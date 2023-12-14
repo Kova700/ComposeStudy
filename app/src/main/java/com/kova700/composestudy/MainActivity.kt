@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,12 +32,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.kova700.composestudy.ui.theme.ComposeStudyTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,9 +47,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-//                MyTextField()
-//                MyTextField2()
-                MyTextField3()
+//                MyImageTest()
+                MyImageTest2()
             }
         }
     }
@@ -56,10 +58,26 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-//        MyTextField()
-//        MyTextField2()
-        MyTextField3()
+//        MyImageTest()
+        MyImageTest2()
     }
+}
+
+@Composable
+fun MyImageTest() {
+    Image(
+        painter = painterResource(id = R.drawable.cat_sleep_img),
+        contentDescription = "catImage"
+    )
+}
+
+@Composable
+fun MyImageTest2() {
+    AsyncImage(
+        model = "https://molo17.com/wp-content/uploads/2021/11/StudioCompose10.jpg",
+        contentDescription = "composeImage",
+        modifier = Modifier.fillMaxSize()
+    )
 }
 
 @Composable
