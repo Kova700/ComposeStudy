@@ -39,11 +39,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -77,7 +79,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                LazyRowTest()
+                ProgressIndicatorTest()
             }
         }
     }
@@ -87,7 +89,45 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        LazyRowTest()
+        ProgressIndicatorTest()
+    }
+}
+
+@Composable
+fun ProgressIndicatorTest() {
+    var progress by remember { mutableStateOf(0.0f) }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = {
+                progress = if (progress < 1f) progress + 0.1f else progress
+            }
+        ) {
+            Text(
+                text = "분노 게이지",
+                fontSize = 30.sp
+            )
+        }
+
+        Spacer(modifier = Modifier.size(30.dp))
+
+        LinearProgressIndicator(
+            progress = progress,
+            modifier = Modifier.height(10.dp),
+            color = Color.Red,
+            trackColor = Color.Cyan
+        )
+
+        Spacer(modifier = Modifier.size(30.dp))
+
+        CircularProgressIndicator(
+            progress = progress,
+            color = Color.Red
+        )
     }
 }
 
