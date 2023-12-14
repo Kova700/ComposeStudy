@@ -70,4 +70,8 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.5.0")
     //Jetpack-Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
+    //Ktor
+    val ktor_version = "2.3.7"
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-android:$ktor_version")
 }
