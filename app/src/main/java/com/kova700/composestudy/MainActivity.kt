@@ -7,8 +7,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +22,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -34,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -51,7 +55,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                RowTest()
+//                ColumnRowTest()
+                ColumnRowTest2()
             }
         }
     }
@@ -61,8 +66,115 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        RowTest()
+//        ColumnRowTest()
+        ColumnRowTest2()
     }
+}
+
+@Composable
+fun ColumnRowTest() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
+            .background(Color.Gray)
+    ) {
+        Text(
+            text = "안녕하세요",
+            color = Color.Blue,
+            fontSize = 20.sp
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+//            horizontalArrangement = Arrangement.SpaceAround,
+//            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Text(text = "왼쪽")
+            Text(text = "중앙")
+            Text(text = "오른쪽")
+        }
+        Text(
+            text = "반갑습니다.",
+            color = Color.Red,
+            fontSize = 20.sp
+        )
+    }
+}
+
+
+@Composable
+fun ColumnRowTest2() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp)
+            .background(Color.Cyan)
+            .border(
+                border = BorderStroke(5.dp, color = Color.Blue)
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(20.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.cat_sleep_img),
+                contentDescription = "catImage",
+                modifier = Modifier
+                    .padding(100.dp)
+                    .clip(RoundedCornerShape(200.dp))
+            )
+        }
+        Text(
+            text = "고앵히",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 50.dp)
+        )
+        Text(
+            text = "Developer",
+            fontSize = 15.sp,
+            modifier = Modifier.padding(top = 10.dp)
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "이메일",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(10.dp)
+            )
+
+            Text(
+                text = "blak1002@gmain.com",
+                fontSize = 15.sp,
+                modifier = Modifier.padding(10.dp),
+                color = Color.Blue
+            )
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "연락처",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(10.dp)
+            )
+
+            Text(
+                text = "010-1234-5678",
+                fontSize = 15.sp,
+                modifier = Modifier.padding(10.dp),
+            )
+        }
+    }
+
 }
 
 @Composable
