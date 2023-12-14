@@ -49,6 +49,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
@@ -64,6 +65,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role.Companion.Switch
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -80,9 +82,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-//                MyTextArea1()
-//                MyTextArea2()
-                MyTextArea3()
+//                ShowAndHideTest()
+                ShowAndHideTest2()
             }
         }
     }
@@ -92,9 +93,77 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-//        MyTextArea1()
-//        MyTextArea2()
-        MyTextArea3()
+//        ShowAndHideTest()
+        ShowAndHideTest2()
+    }
+}
+
+@Composable
+fun ShowAndHideTest() {
+    var isVisible by remember {
+        mutableStateOf(
+            false
+        )
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Button(
+            onClick = {
+                isVisible = !isVisible
+                Log.d("로그", ": ShowAndHideTest() - isButtonVisible : $isVisible")
+            }
+        ) {
+            Text(
+                text = if (isVisible) "숨기기" else "보이기"
+            )
+        }
+
+        Spacer(modifier = Modifier.size(50.dp))
+
+        if (isVisible) {
+            Text(
+                text = "TextView",
+            )
+        }
+    }
+
+}
+
+
+@Composable
+fun ShowAndHideTest2() {
+    var switchState by remember {
+        mutableStateOf(
+            false
+        )
+    }
+    Column(
+        modifier = Modifier.padding(20.dp)
+    ) {
+        Switch(
+            checked = switchState,
+            onCheckedChange = { checked ->
+                switchState = checked
+            }
+        )
+
+        Text(
+            text = if (switchState) "On" else "Off",
+            fontSize = 50.sp
+        )
+
+        if (switchState){
+            Button(onClick = {  }) {
+                Text(
+                    text = "얍얍",
+                    fontSize = 30.sp
+                )
+            }
+        }
     }
 }
 
