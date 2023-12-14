@@ -5,12 +5,15 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,7 +36,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                SimpleCounterBtn()
+                ColumnTest2()
             }
         }
     }
@@ -43,7 +46,52 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        SimpleCounterBtn()
+        ColumnTest2()
+    }
+}
+
+@Composable
+fun ColumnTest1() {
+    Text(
+        text = "Hi",
+        fontSize = 30.sp
+    )
+    Text(
+        text = "Hi2",
+        fontSize = 30.sp,
+        modifier = Modifier.padding(top = 50.dp)
+    )
+    Text(
+        text = "Hi3",
+        fontSize = 30.sp,
+        modifier = Modifier.padding(top = 100.dp)
+    )
+}
+
+
+@Composable
+fun ColumnTest2() {
+    Column(
+        modifier = Modifier.padding(30.dp)
+    ){
+        Text(
+            text = "Hello",
+            fontSize = 30.sp
+        )
+        Spacer(modifier = Modifier.padding(30.dp))
+        Divider(
+            thickness = 4.dp,
+            color = Color.Blue
+        )
+        Text(
+            text = "Hello2",
+            fontSize = 30.sp
+        )
+        Text(
+            text = "Hello3",
+            fontSize = 30.sp
+        )
+
     }
 }
 
@@ -64,9 +112,7 @@ fun SimpleCounterBtn() {
             fontSize = 50.sp
         )
     }
-
 }
-
 
 @Composable
 fun MyTextEx() {
