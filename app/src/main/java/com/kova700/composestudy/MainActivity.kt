@@ -4,6 +4,7 @@ package com.kova700.composestudy
 
 import android.os.Bundle
 import android.util.Log
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -49,6 +50,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import coil.compose.AsyncImage
 import com.kova700.composestudy.ui.theme.ComposeStudyTheme
 
@@ -57,12 +59,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                Column {
-                    CardTest("1")
-                    CardTest("2")
-                    CardTest("3")
-                    CardTest("4")
-                }
+//                WebViewTest("https://www.naver.com/")
+                WebViewTest("https://www.youtube.com/")
             }
         }
     }
@@ -72,13 +70,19 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        Column {
-            CardTest("1")
-            CardTest("2")
-            CardTest("3")
-            CardTest("4")
+//        WebViewTest("https://www.naver.com/")
+        WebViewTest("https://www.youtube.com/")
+    }
+}
+
+@Composable
+fun WebViewTest(url: String) {
+    AndroidView(factory = {
+        WebView(it).apply {
+            loadUrl(url)
         }
     }
+    )
 }
 
 @Composable
