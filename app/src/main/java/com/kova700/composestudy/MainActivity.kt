@@ -68,6 +68,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -79,7 +80,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                ProgressIndicatorTest()
+//                MyTextArea1()
+//                MyTextArea2()
+                MyTextArea3()
             }
         }
     }
@@ -89,7 +92,69 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        ProgressIndicatorTest()
+//        MyTextArea1()
+//        MyTextArea2()
+        MyTextArea3()
+    }
+}
+
+@Composable
+fun MyTextArea1() {
+    Column {
+        Text(
+            text = "안녕",
+            fontSize = 100.sp,
+            color = Color.Blue
+        )
+        Text(
+            text = "안녕",
+            fontSize = 100.sp,
+            color = Color.Green
+        )
+        Text(
+            text = "안녕",
+            fontSize = 100.sp,
+            color = Color.Gray
+        )
+    }
+}
+
+
+@Composable
+fun MyTextArea2() {
+    Column {
+        MyTextFormat1(text = "안녕", fontSize = 100.sp, color = Color.Blue)
+        MyTextFormat1(text = "하세요", fontSize = 100.sp, color = Color.Green)
+        MyTextFormat1(text = "여러분", fontSize = 100.sp, color = Color.Gray)
+    }
+}
+
+@Composable
+fun MyTextFormat1(text: String, fontSize: TextUnit, color: Color) {
+    Text(
+        text = text,
+        fontSize = fontSize,
+        color = color
+    )
+}
+
+@Composable
+fun MyTextArea3() {
+    MyTextFormat2 {
+        Text(
+            text = "안녕",
+            fontSize = 100.sp,
+            color = Color.Green
+        )
+    }
+}
+
+@Composable
+fun MyTextFormat2(content: @Composable () -> Unit) {
+    Column {
+        (1..3).onEach {
+            content()
+        }
     }
 }
 
