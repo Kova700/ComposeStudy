@@ -60,6 +60,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -81,13 +82,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.kova700.composestudy.ui.theme.ComposeStudyTheme
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                MyNumNav(navHostController = rememberNavController())
             }
         }
     }
@@ -97,13 +100,31 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        MyNumNav(navHostController = rememberNavController())
+    }
+}
+
+@Composable
+fun APITest(url: String) {
+    val coroutineScope = rememberCoroutineScope()
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center,
+    ) {
+        Button(
+            onClick = {
+                coroutineScope.launch {
+                    val response = ktorClient.get(url)
+                    Log.d("로그", "MainActivity: requestApi() - response : ${response.body<String>()}")
+                }
+            }
+        ) {
+            Text(text = "Call API")
+        }
     }
 }
 
 @Composable
 fun MyGridScreen(navHostController: NavHostController) {
-
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         modifier = Modifier.padding(20.dp),
@@ -126,7 +147,6 @@ fun MyGridScreen(navHostController: NavHostController) {
             }
         }
     }
-
 }
 
 @Composable
