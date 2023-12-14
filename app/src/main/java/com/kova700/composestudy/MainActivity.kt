@@ -25,6 +25,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
@@ -55,8 +57,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-//                ColumnRowTest()
-                ColumnRowTest2()
+                Column {
+                    CardTest("1")
+                    CardTest("2")
+                    CardTest("3")
+                    CardTest("4")
+                }
             }
         }
     }
@@ -66,10 +72,44 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-//        ColumnRowTest()
-        ColumnRowTest2()
+        Column {
+            CardTest("1")
+            CardTest("2")
+            CardTest("3")
+            CardTest("4")
+        }
     }
 }
+
+@Composable
+fun CardTest(text: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(100.dp)
+            .padding(10.dp),
+        shape = RoundedCornerShape(50.dp),
+//        border = BorderStroke(1.dp, Color.Black),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 10.dp
+        )
+    ) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.LightGray),
+            contentAlignment = Alignment.Center
+        ) {
+
+            Text(
+                text = text,
+                fontSize = 30.sp
+            )
+        }
+    }
+}
+
 
 @Composable
 fun ColumnRowTest() {
@@ -101,7 +141,6 @@ fun ColumnRowTest() {
         )
     }
 }
-
 
 @Composable
 fun ColumnRowTest2() {
