@@ -23,6 +23,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -73,7 +75,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                ScaffoldTest()
+                LazyColumnTest()
             }
         }
     }
@@ -83,7 +85,22 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        ScaffoldTest()
+        LazyColumnTest()
+    }
+}
+
+@Composable
+fun LazyColumnTest() {
+    val textList = ('A'..'Z').toList().map { it.toString() }
+
+    LazyColumn {
+        items(textList) { item ->
+            Text(
+                text = item,
+                fontSize = 60.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }
 
