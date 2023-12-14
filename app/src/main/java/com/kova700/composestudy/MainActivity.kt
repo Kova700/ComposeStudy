@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.kova700.composestudy
 
 import android.os.Bundle
@@ -5,21 +7,27 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -36,7 +44,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                ColumnTest2()
+//                MyTextField()
+//                MyTextField2()
+                MyTextField3()
             }
         }
     }
@@ -46,7 +56,84 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        ColumnTest2()
+//        MyTextField()
+//        MyTextField2()
+        MyTextField3()
+    }
+}
+
+@Composable
+fun MyTextField() {
+    var textState by remember {
+        mutableStateOf("Hello")
+    }
+
+    TextField(
+        value = textState,
+        //사용자가 입력하는 값을 옵저빙하고 textState에 할당
+        onValueChange = { textState = it },
+        label = {
+            Text(text = "입력하는 공간")
+        }
+    )
+}
+
+
+@Composable
+fun MyTextField2() {
+    var textState by remember {
+        mutableStateOf("Hello")
+    }
+
+    //TextField외부에 OutLine이 생김
+    OutlinedTextField(
+        value = textState,
+        onValueChange = { textState = it },
+        label = {
+            Text(text = "입력하는 공간")
+        }
+    )
+}
+
+
+@Composable
+fun MyTextField3() {
+    //입력한 부분
+    var textState by remember {
+        mutableStateOf("")
+    }
+    //결과값 부분
+    var resultText by remember {
+        mutableStateOf("")
+    }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,           //수직 중앙정렬
+        horizontalAlignment = Alignment.CenterHorizontally  //수평 중앙정렬
+    ) {
+
+        //텍스트 기본값 = textState
+        TextField(
+            value = textState,
+            //사용자가 입력하는값 textState에 할당
+            onValueChange = { textState = it },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        //누르면 resultText에 textState값을 할당
+        Button(
+            onClick = {
+                resultText = textState
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "입력하기")
+        }
+
+        //resultText를 바라보고 있음
+        Text(
+            text = "결과값 : $resultText"
+        )
     }
 }
 
@@ -73,7 +160,7 @@ fun ColumnTest1() {
 fun ColumnTest2() {
     Column(
         modifier = Modifier.padding(30.dp)
-    ){
+    ) {
         Text(
             text = "Hello",
             fontSize = 30.sp

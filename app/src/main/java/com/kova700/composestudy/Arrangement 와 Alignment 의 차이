@@ -1,0 +1,4 @@
+Arrangement     : 레이아웃의 중심축 방향
+Alignment       : 레이아웃의 중심축 반대방향
+Column 의 arrangement 는 세로, alignment 는 가로를 가르키고,
+Row 의 arrangment 는 가로, alignment 는 세로를 가르킴
