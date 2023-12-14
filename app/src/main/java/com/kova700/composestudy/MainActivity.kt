@@ -31,6 +31,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -59,8 +60,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-//                WebViewTest("https://www.naver.com/")
-                WebViewTest("https://www.youtube.com/")
+//                SurfaceTest()
+                SurfaceTest2()
             }
         }
     }
@@ -70,10 +71,61 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-//        WebViewTest("https://www.naver.com/")
-        WebViewTest("https://www.youtube.com/")
+//        SurfaceTest()
+        SurfaceTest2()
     }
 }
+
+@Composable
+fun SurfaceTest() {
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+        color = Color.Red,
+        shape = RoundedCornerShape(20.dp),
+        shadowElevation = 20.dp
+    ) {
+        Button(
+            onClick = {},
+            colors = ButtonDefaults.outlinedButtonColors( //바깥쪽 컬러와 버튼 컬러 통일
+                contentColor = Color.Green //버튼 안에 있는 컨텐츠 컬러 설정
+            )
+        ) {
+            Text(text = "클릭해보세요")
+        }
+    }
+}
+
+@Composable
+fun SurfaceTest2() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color.LightGray,
+        border = BorderStroke(2.dp, Color.Red),
+        contentColor = Color.Blue
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Surface(
+                modifier = Modifier.size(200.dp),
+                color = Color.Red
+            ) {
+                Text(text = "This is Jetpack Compose")
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "This is Jetpack Compose EX"
+            )
+        }
+    }
+}
+
 
 @Composable
 fun WebViewTest(url: String) {
