@@ -12,6 +12,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -75,7 +77,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                LazyColumnTest()
+                LazyRowTest()
             }
         }
     }
@@ -85,7 +87,24 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeStudyTheme {
-        LazyColumnTest()
+        LazyRowTest()
+    }
+}
+
+@Composable
+fun LazyRowTest() {
+    val textList = ('A'..'Z').toList().map { it.toString() }
+
+    LazyRow {
+        items(textList) { item ->
+            Text(
+                text = item,
+                fontSize = 100.sp,
+                modifier = Modifier.clickable {
+                    Log.d("로그", ": LazyRowTest() - Clicked item : $item")
+                }
+            )
+        }
     }
 }
 
