@@ -39,6 +39,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -94,14 +95,86 @@ import com.kova700.composestudy.ui.theme.ComposeStudyTheme
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.launch
+import java.nio.file.WatchEvent
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                DrawerTest()
+                DialogTest()
             }
+        }
+    }
+}
+
+@Composable
+fun DialogTest() {
+
+    var dialogFlag by remember {
+        mutableStateOf(false)
+    }
+
+    var inputText by remember {
+        mutableStateOf("")
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
+            onClick = {
+                dialogFlag = true
+            }
+        ) {
+            Text(text = "나와라 Dialog")
+        }
+
+        if (dialogFlag) {
+            AlertDialog(
+                onDismissRequest = { /*TODO*/ },
+                title = {
+                    Text(text = "Dialog Title")
+                },
+                text = {
+                    TextField(value = inputText, onValueChange = { inputText = it })
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            dialogFlag = false
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Blue
+                        )
+                    ) {
+                        Text(text = "OK")
+                    }
+                },
+                dismissButton = {
+                    Button(
+                        onClick = {
+                            dialogFlag = false
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Gray
+                        )
+                    ) {
+                        Text(text = "No")
+                    }
+                }
+            )
+        }
+
+        if (inputText.isNotBlank()) {
+            Spacer(modifier = Modifier.size(50.dp))
+
+            Text(
+                text = "입력된 Text :$inputText",
+                lineHeight = 30.sp
+            )
         }
     }
 }
@@ -172,7 +245,7 @@ fun DrawerTest() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
-                    when(selectedScreen.value){
+                    when (selectedScreen.value) {
                         Screen.Home -> HomeScreen()
                         Screen.Settings -> SettingsScreen()
                         Screen.Phone -> PhoneScreen()
