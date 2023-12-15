@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -95,18 +96,74 @@ import com.kova700.composestudy.ui.theme.ComposeStudyTheme
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import kotlinx.coroutines.launch
-import java.nio.file.WatchEvent
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                DialogTest()
+//                CanvasTest()
+//                CanvasTest2()
+                CanvasTest3()
             }
         }
     }
 }
+
+@Composable
+fun CanvasTest() {
+    Box(
+        modifier = Modifier
+            .size(50.dp)
+            .background(Color.Green)
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawCircle(
+                Color.Black,
+                radius = size.minDimension / 10
+            ) //size.minDimension = 가로 세로 둘중에 작은값 선택
+        }
+    }
+}
+
+@Composable
+fun CanvasTest2() {
+    Box(
+        modifier = Modifier
+            .width(100.dp)
+            .height(100.dp)
+            .background(Color.Green)
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            drawCircle(
+                Color.Black,
+                radius = size.minDimension / 2
+            ) //size.minDimension = 가로 세로 둘중에 작은값 선택
+        }
+    }
+}
+
+@Composable
+fun CanvasTest3() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(500.dp)
+            .background(Color.Red)
+    ) {
+        Canvas(
+            modifier = Modifier
+                .size(200.dp)
+                .align(Alignment.Center)
+        ) {
+            drawCircle(
+                Color.Black,
+                radius = size.minDimension / 2
+            ) //size.minDimension = 가로 세로 둘중에 작은값 선택
+        }
+    }
+}
+
 
 @Composable
 fun DialogTest() {
