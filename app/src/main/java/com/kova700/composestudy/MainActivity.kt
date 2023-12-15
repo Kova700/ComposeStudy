@@ -104,7 +104,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                FontTest()
+//                ShapeTest()
+                ShapeTest2()
             }
         }
     }
@@ -114,12 +115,90 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Preview1() {
     ComposeStudyTheme {
-        FontTest()
+//        ShapeTest()
+        ShapeTest2()
     }
 }
 
 @Composable
-fun FontTest(){
+fun ShapeTest() {
+    Column() {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.extraLarge) // 모서리를 자름
+                .background(Color.Red)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.large) // 모서리를 자름
+                .background(Color.Gray)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.medium) // 모서리를 자름
+                .background(Color.Green)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.small) // 모서리를 자름
+                .background(Color.Yellow)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.extraSmall) // 모서리를 자름
+                .background(Color.Cyan)
+        )
+    }
+}
+
+
+@Composable
+fun ShapeTest2() {
+    Column() {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.extraLarge) // 모서리를 자름
+                .background(Color.Red)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.large) // 모서리를 자름
+                .background(Color.Gray)
+        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(20.dp)
+                .clip(MaterialTheme.shapes.medium) // 모서리를 자름
+                .background(Color.Green)
+        )
+    }
+}
+
+@Composable
+fun FontTest() {
     Column {
         Text(
             text = "FontTest - titleLarge",
