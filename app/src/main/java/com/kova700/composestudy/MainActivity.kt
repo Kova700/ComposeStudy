@@ -2,6 +2,7 @@
 
 package com.kova700.composestudy
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.webkit.WebView
@@ -54,6 +55,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -83,6 +85,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -101,13 +104,45 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeStudyTheme {
-//                CanvasTest()
-//                CanvasTest2()
-                CanvasTest3()
-            }
+            ThemeTest1()
         }
     }
+}
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "Light"
+)
+@Composable
+fun Preview1() {
+    ThemeTest1()
+}
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "Dark"
+)
+@Composable
+fun Preview2() {
+    ThemeTest1()
+}
+
+@Composable
+fun ThemeTest1() {
+
+    ComposeStudyTheme(
+//        darkTheme = true
+    ) {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Text(text = "HELLO")
+        }
+    }
+
 }
 
 @Composable
