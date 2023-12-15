@@ -104,8 +104,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeStudyTheme {
-                TextStyleTest1()
-//                TextStyleTest2()
+                FontTest()
             }
         }
     }
@@ -114,9 +113,22 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun Preview1() {
-    MaterialTheme {
-        TextStyleTest1()
-//        TextStyleTest2()
+    ComposeStudyTheme {
+        FontTest()
+    }
+}
+
+@Composable
+fun FontTest(){
+    Column {
+        Text(
+            text = "FontTest - titleLarge",
+            style = MaterialTheme.typography.titleLarge
+        )
+        Text(
+            text = "FontTest - bodyLarge",
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 
